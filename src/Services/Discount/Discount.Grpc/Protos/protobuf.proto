@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+option csharp_namespace = "Discount.Grpc.Protos";
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service DiscoutService {
+  rpc ListDiscouts(ListDiscoutsRequest) returns (ListDiscoutsResponse) {
+    option (google.api.http) = {
+      get: "/v1alpha1/Discouts"
+    };
+  }
+
+  rpc GetDiscout(GetDiscoutRequest) returns (Discout) {
+    option (google.api.http) = {
+      get: "/v1alpha1/{name=Discouts/*}"
+    };
+  }
+
+  rpc CreateDiscout(CreateDiscoutRequest) returns (Discout) {
+    option (google.api.http) = {
+      post: "/v1alpha1/Discouts"
+      body: "Discout"
+    };
+  }
+
+  rpc UpdateDiscout(UpdateDiscoutRequest) returns (Discout) {
+    option (google.api.http) = {
+      patch: "/v1alpha1/{Discout.name=Discouts/*}"
+      body: "Discout"
+    };
+  }
+
+  rpc DeleteDiscout(DeleteDiscoutRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha1/{name=Discouts/*}"
+    };
+  }
+}
+
+// message Discout {
+// ! This should be defined elsewere
+// }
+
+message ListDiscoutsRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListDiscoutsResponse {
+  // The field name should match the noun "Discout" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated Discout Discouts = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetDiscoutRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateDiscoutRequest {
+  // The parent resource name where the Discout is to be created.
+  string parent = 1;
+
+  // The Discout id to use for this Discout.
+  string Discout_id = 2;
+
+  // The Discout resource to create.
+  // The field name should match the Noun in the method name.
+  Discout Discout = 3;
+}
+
+message UpdateDiscoutRequest {
+  // The Discout resource which replaces the resource on the server.
+  Discout Discout = 1;
+
+  // The update mask applies to the resource. For the `FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  FieldMask update_mask = 2;
+}
+
+message DeleteDiscoutRequest {
+  // The resource name of the Discout to be deleted.
+  string name = 1;
+}
+
+
+package greet1;
+message g{
+string ghg=2;
+}
+
+message gg {
+    int32 ppp=1;
+}
+
